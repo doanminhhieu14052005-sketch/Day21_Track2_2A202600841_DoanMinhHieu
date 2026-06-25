@@ -6,7 +6,7 @@ After=network.target
 User=github
 WorkingDirectory=/home/github/mlops-lab
 Environment="GOOGLE_APPLICATION_CREDENTIALS=/home/github/mlops-lab/sa-key.json"
-Environment="CLOUD_BUCKET=mlops-lab-bucket-triagehealth"
+Environment="GCS_BUCKET=mlops-lab-bucket-calm-streamer-499804-e6"
 ExecStart=/home/github/mlops-lab/venv/bin/uvicorn src.serve:app --host 0.0.0.0 --port 8000
 Restart=always
 
