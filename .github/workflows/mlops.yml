@@ -64,7 +64,7 @@ jobs:
           credentials_json: '${{ secrets.CLOUD_CREDENTIALS }}'
 
       - name: Pull data with DVC
-        run: dvc pull -j 1 -v data/train_phase1.csv data/train_phase2.csv data/eval.csv
+        run: dvc pull -j 1 -v data/train_phase1.csv data/eval.csv
 
       - name: Train model
         run: python src/train.py
