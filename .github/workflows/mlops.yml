@@ -65,7 +65,9 @@ jobs:
           echo "Size of sa-key.json: $(wc -c < sa-key.json) bytes"
 
       - name: Pull data with DVC
-        run: dvc pull data/train_phase1.csv data/eval.csv
+        run: |
+          dvc remote modify --local myremote credentialpath sa-key.json
+          dvc pull data/train_phase1.csv data/eval.csv
 
       - name: Train model
         run: python src/train.py
