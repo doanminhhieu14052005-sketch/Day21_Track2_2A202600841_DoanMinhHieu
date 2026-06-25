@@ -2,3 +2,4 @@
     remote = myremote
 ['remote "myremote"']
     url = gs://mlops-lab-bucket-triagehealth/dvc
+    projectname = triagehealth
