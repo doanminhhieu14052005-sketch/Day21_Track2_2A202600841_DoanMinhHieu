@@ -1,5 +1,5 @@
 [core]
     remote = myremote
 ['remote "myremote"']
-    url = gs://mlops-lab-bucket-triagehealth/dvc
-    projectname = triagehealth
+    url = gs://mlops-lab-bucket-calm-streamer-499804-e6/dvc
+    projectname = calm-streamer-499804-e6
