@@ -56,14 +56,10 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Authenticate to Cloud Storage
-        run: |
-          cat << 'EOF' > sa-key.json
-          ${{ secrets.CLOUD_CREDENTIALS }}
-          EOF
-          echo "GOOGLE_APPLICATION_CREDENTIALS=$(pwd)/sa-key.json" >> $GITHUB_ENV
-          echo "Size of sa-key.json: $(wc -c < sa-key.json) bytes"
-          python -c "import json; d=json.load(open('sa-key.json')); print('Email:', d.get('client_email')); print('Project:', d.get('project_id'))"
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.CLOUD_CREDENTIALS }}'
 
       - name: Pull data with DVC
         run: dvc pull data/train_phase1.csv data/eval.csv
