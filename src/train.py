@@ -29,7 +29,12 @@ def train(
     """
 
     # 1. Doc du lieu huan luyen va danh gia
-    df_train = pd.read_csv(data_path)
+    #    data_path co the la mot duong dan (str) hoac danh sach nhieu file;
+    #    neu la danh sach, gop tat ca lai de tang luong du lieu huan luyen.
+    if isinstance(data_path, (list, tuple)):
+        df_train = pd.concat([pd.read_csv(p) for p in data_path], ignore_index=True)
+    else:
+        df_train = pd.read_csv(data_path)
     df_eval = pd.read_csv(eval_path)
 
     # 2. Tach dac trung (X) va nhan (y)
@@ -76,4 +81,5 @@ def train(
 if __name__ == "__main__":
     with open("params.yaml") as f:
         params = yaml.safe_load(f)
-    train(params)
+    # Huan luyen tren ca hai phase de co du du lieu vuot nguong accuracy.
+    train(params, data_path=["data/train_phase1.csv", "data/train_phase2.csv"])
