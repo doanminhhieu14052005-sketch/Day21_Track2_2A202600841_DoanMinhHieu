@@ -54,7 +54,9 @@ jobs:
           python-version: "3.10"
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install -r requirements.txt
+          pip install dvc[gs] gcsfs==2023.6.0 aiohttp==3.8.4
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
@@ -64,7 +66,7 @@ jobs:
       - name: Pull data with DVC
         run: |
           dvc remote modify myremote projectname triagehealth
-          dvc pull -v data/train_phase1.csv data/eval.csv
+          dvc pull -j 1 -v data/train_phase1.csv data/eval.csv
 
       - name: Train model
         run: python src/train.py
